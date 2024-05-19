@@ -1,3 +1,7 @@
+mod chess;
+use chess::Position;
+
 fn main() {
-    println!("Hello, world!");
+    let position: Position = Position::new();
+    position.display()
 }
