@@ -28,13 +28,21 @@ impl BitBoard {
 
 }
 
+pub fn loc_as_square(location: usize) -> Square {
+    Square::new(location / 8, location % 8)
+}
+
+pub fn square_as_loc(square: Square) -> usize {
+    square.j_pos * 8 + square.i_pos
+}
+
 pub struct Team;
 impl Team {
     pub const WHITE: usize = 0;
     pub const BLACK: usize = 1;
 }
 
-pub enum Piece;
+pub struct Piece;
 impl Piece {
     pub const ROOK: usize = 0;
     pub const BISHOP: usize = 1;
@@ -53,6 +61,12 @@ pub struct Square {
         let i_pos = i;
         Square {j_pos, i_pos}
     }
+}
+
+
+pub struct Move {
+    original_pos: Square,
+    to_pos: Square,
 }
 
 pub struct Position {
@@ -150,6 +164,28 @@ pub struct Position {
             return None
         }
     }
+
+
+
+    pub fn prune_invalid_moves(&self) {
+        //todo
+    }
+    // first determine moves, then prune invalid ones 
+    pub fn get_pawn_moves(&self, team: usize, location: usize) -> Option<Vec<Square>> {
+        if location < 0 || location >= 64 {
+            panic!("invalid input")
+        }
+
+        let mut can_two = false;
+        let moves: Vec<Square> = Vec::new();
+        if team == Team::WHITE {
+            None
+        } else {
+            None
+        }
+    }
+
+
 }
 
 pub struct Chess {
@@ -164,7 +200,9 @@ pub struct Chess {
         if !(self.current_state.exists_piece_at_location(self.current_turn, location)) {
             return Ok(None)
         } else {
+            match self.current_state.get_piece_at_location(self.current_turn, location) {
 
+            }
         }
 
         return Ok(None)
